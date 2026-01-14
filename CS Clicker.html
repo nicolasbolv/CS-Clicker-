@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker XMAS </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Luckiest+Guy&family=Momo+Trust+Sans:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+
+<style>
+
+
+
+
+body{
+
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(rgb(227, 163, 0), rgb(4, 6, 97) );
+font-family: 'Luckiest Guy';
+
+
+color:#ffffff;
+overflow: hidden;
+
+
+}
+
+
+#cookie{
+
+width: 200px;
+height: 200px;
+cursor: pointer;
+transition: transform 0.3s ease, box-shadow 0.2s ease;
+
+}
+
+
+
+#cookie:hover{
+
+transform: scale(1.2);
+
+
+
+}
+
+#main-content{
+text-align: center;
+display: none;
+max-width: 900px;
+padding: 30px 20px;
+
+
+}
+
+
+
+#start-button{
+
+padding: 15px 30px;
+font-size:24px ;
+font-weight: bold;
+border: none;
+color: whitesmoke;
+background-color: rgb(123, 6, 155);
+border-radius: 10px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+#start-button:hover{
+    background-color: rgb(81, 9, 128);
+
+
+}
+
+
+
+
+.falling-snow{
+        position: absolute;
+        top:-10px;
+        left:0;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(255,255,255,0.9);
+        animation: snowfall 5s linear infinite;
+    }
+
+
+ @keyframes snowfall{
+        0%{transform: translateY(0);opacity:1;}
+        100%{transform: translateY(100vh);opacity:0;}
+ }
+
+
+  .shake{
+        animation: shake 0.1s ease;
+
+    }
+
+
+     @keyframes shake{
+        0%{transform:translateX(-5px) ;}
+        25%{transform:translateX(5px) ;}
+        50%{transform:translateX(-3px) ;}
+        75%{transform:translatX(3px) ;}
+        100%{transform:translateX(0px) ;}
+
+    }
+
+
+.floating-point{
+position: absolute;
+font-size: 100px;
+font-weight: bold;
+color: darkgoldenrod;
+animation: floatUp 1s ease-out forwards;
+pointer-events: none;
+
+
+}
+
+
+@keyframes floatUp{
+0%{
+    opacity:1;
+}
+100%{
+    opacity:0;
+}
+
+
+}
+
+
+
+
+.flying-gingerbread{
+position: absolute;
+width: 100px;
+animation: flyAcross 5s linear forwards
+
+}
+
+
+@keyframes flyAcross{
+from {
+top:-100px;
+transform: rotate(0deg);
+
+}
+to {top:100vh;
+    transform:rotate(360deg);
+
+
+}
+
+
+}
+
+</style>
+
+
+
+
+</head>
+
+
+<body>
+
+    <button id="start-button">
+
+START
+
+    </button>
+    
+<div id="main-content">
+
+    <h1> CS GO COOKIE CLICKER </h1>
+    <img src="CS GO.png" alt="" id="cookie">
+    
+ <div id="cookie-count">0</div>
+
+</div>
+
+
+<script>
+
+const startButton = document.getElementById('start-button');
+ const mainContent = document.getElementById('main-content');
+
+
+
+startButton.addEventListener('click', function (){
+startButton.style.display='none';
+});
+
+
+
+ startButton.addEventListener('click', function(){startButton.style.display='none';
+    mainContent.style.display='block';
+    //Button verschwindet, Lebkuchen und counter werden angezeigt    
+    });
+
+
+    let cookieCount= 0;
+const cookie=document.getElementById("cookie");
+const cookieCountDisplay=document.getElementById("cookie-count");
+
+cookie.addEventListener("click", function(){
+cookieCount=cookieCount+1;
+//console.log(cookieCount);//gibt Wert in Konsole aus
+console.log(cookieCount);
+cookieCountDisplay.textContent=cookieCount;
+cookie.classList.add("shake");
+setTimeout(()=>cookie.classList.remove("shake"),100);
+
+
+
+
+
+
+
+createFloatingPoint(event.clientX, event.clientY);
+
+if (cookieCount % 10 === 0){
+
+createflyingGingerbread();
+
+}
+
+});
+
+
+
+
+function createFloatingPoint(x,y){
+const floatingPoint=document.createElement('div');
+floatingPoint.textContent="+1";
+floatingPoint.className="floating-point";
+document.body.appendChild(floatingPoint);
+
+floatingPoint.style.left=`${x}px`;
+floatingPoint.style.top=`${y}px`;
+
+
+
+
+
+}
+
+
+function createflyingGingerbread(){
+const gingerbread=document.createElement('img');
+gingerbread.src="AWP.png";
+gingerbread.className='flying-gingerbread';
+document.body.appendChild(gingerbread);
+gingerbread.style.left = `${Math.random() * window.innerWidth}px`;
+
+//klicken
+//bonuspunkte
+//spinnen
+
+gingerbread.addEventListener('click',function(){
+cookieCount+=50;
+cookieCountDisplay.textContent=cookieCount;
+gingerbread.remove();
+})
+
+}
+
+
+
+
+
+
+
+function createSnowFlake(){
+const snowflake=document.createElement('div');
+snowflake.className='falling-snow';
+snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(snowflake);
+
+};
+
+setInterval(createSnowFlake,100);
+
+    </script>
+
+
+
+
+</body>
+</html>
